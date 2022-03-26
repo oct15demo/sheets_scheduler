@@ -37,16 +37,16 @@ function clear() {
 }
 
 function setPermissions(){
-  debug = true 
+  debug = false
   if (debug) {
     persons = ['red','green','orange']
   } else {
-    persons = ['person1@google.com','person2@google.com','person3@gmail.com',]
+    persons = ['person1@gmail.com','person2@gmail.com','person3@gmail.com',]
   }
   colsPerDay = persons.length
   if(debug)Browser.msgBox(colsPerDay, Browser.Buttons.OK_CANCEL);
   daysPerWeek = 7
-  weeks = 2
+  weeks = 2 
   rowsBetweenWeeks = 28
   var activeSheet = SpreadsheetApp.getActive();
   var sheet = activeSheet.getSheets()[0];
@@ -63,6 +63,7 @@ function setPermissions(){
           range.setBackground(persons[perIdx]);
         } else {
           rangeProtected = range.protect()
+          rangeProtected.removeEditors(rangeProtected.getEditors());
           rangeProtected.addEditor(persons[perIdx]);
         }
       }
@@ -72,4 +73,4 @@ function setPermissions(){
 //https://davidmeindl.com/google-sheets-convert-column-index-to-column-letter/
 //=SUBSTITUTE(ADDRESS(1, 10, 4), 1, "")
 //https://stackoverflow.com/questions/66769617/why-am-i-getting-this-error-the-parameters-string-number-number-number-dont
-
+//https://stackoverflow.com/questions/31487804/how-to-remove-editors-from-protected-cells-or-permanently-protect-cells-in-googl
